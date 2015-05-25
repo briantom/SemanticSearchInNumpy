@@ -100,7 +100,7 @@ def make_solr_doc(doc):
 if __name__ == '__main__':
     usage = 'usage: %prog [options] file'
     parser = OptionParser(usage)
-    parser.add_option('-u', '--url', dest='url', default='localhost:8983/solr/update', help='POST endpoint')
+    parser.add_option('-u', '--url', dest='url', default='ec2-52-10-79-212.us-west-2.compute.amazonaws.com:8080/solr/update', help='POST endpoint')
     parser.add_option('-b', '--bulk-size', dest='bulkSize', type='int', default=10000, help='Number of docs to submit in each bulk request.')
 
     options, args = parser.parse_args()
