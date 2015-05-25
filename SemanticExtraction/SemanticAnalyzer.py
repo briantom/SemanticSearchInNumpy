@@ -15,7 +15,7 @@ class SolrTermVectorCollector(object):
         solrBaseUrl = urlparse.urljoin(solrBaseUrl, 'tvrh')
         return solrBaseUrl
     
-    def __init__(self, solrUrl="http://localhost:8983/solr",
+    def __init__(self, solrUrl="http://ec2-52-10-79-212.us-west-2.compute.amazonaws.com:8080/solr",
             collection="collection1",
             field='Title',
             feature='tf-idf',
@@ -227,7 +227,7 @@ class SolrBlurredTermUpdater(object):
     def __init__(self,
             termDocCollector,
             blurredField,
-            solrUrl="http://localhost:8983/solr",
+            solrUrl="http://ec2-52-10-79-212.us-west-2.compute.amazonaws.com:8080/solr",
             collection="collection1",
             idField='Id',
             batchSize=1000):
@@ -303,5 +303,5 @@ if __name__ == "__main__":
 
     field = argv[1]
     collection = argv[2] if len(argv)>2 else "collection1"
-    solrUrl = argv[3] if len(argv)>3 else "http://localhost:8983/solr"
+    solrUrl = argv[3] if len(argv)>3 else "http://ec2-52-10-79-212.us-west-2.compute.amazonaws.com:8080/solr"
     main(field,collection,solrUrl)
