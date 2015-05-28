@@ -1,26 +1,37 @@
 import json
 import re
 import sys
+from cgi import escape
 from optparse import OptionParser
 from pprint import pprint
+html_escape_table = {
+        "&": "&amp;",
+        '"': "&quot;",
+        "'": "&apos;",
+        ">": "&gt;",
+        "<": "&lt;",
+        }
+    
+def html_escape(text):
+   return "".join(html_escape_table.get(c,c) for c in text)
 
 def xmlFromJson(json):
     result = '<?xml version="1.0" encoding="utf-8"?>\n'
-    result += "<posts>"
+    result += "<posts>\n"
    
     for i in range(len(json)):
-        itemTag = "<row Id='"
+        itemTag = '<row Id="'
         itemTag += str(i + 1)
-        itemTag += "' mongoId='"
-        itemTag += json[i]['_id']
-        itemTag += "' Body='"
-        itemTag += json[i]['text']
-        itemTag += "' />"
+        itemTag += '" mongoId="'
+        itemTag += html_escape(escape(json[i]['_id']))
+        itemTag += '" Body="'
+        itemTag += html_escape(escape(json[i]['text']))
+        itemTag += '" />'
         
         result += itemTag
         result += '\n'
 
-    result += "</posts>"
+    result += '</posts>'
     return result
 
 def main(filename):
